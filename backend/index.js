@@ -1,3 +1,5 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
 const connectToMongo = require('./db');
 const express = require('express');
 
@@ -50,4 +52,15 @@ app.use('/api/blogs', require('./routes/blogs'));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
+});
+
+const filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(filename);
+// Have Node serve the files for our built React app
+app.use(express.static(path.resolve(__dirname, '../build')));
+
+// All other GET requests not handled before will return our React app
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
 });

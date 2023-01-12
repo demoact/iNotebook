@@ -69,7 +69,7 @@ const Login = (props) => {
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Login
+            Login now
           </button>
         </form>
       </div>

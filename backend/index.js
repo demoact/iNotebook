@@ -1,5 +1,4 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
+const path = require('path');
 const connectToMongo = require('./db');
 const express = require('express');
 
@@ -54,9 +53,6 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-const filename = fileURLToPath(import.meta.url);
-
-const __dirname = path.dirname(filename);
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, '../build')));
 

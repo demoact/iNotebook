@@ -1,96 +1,100 @@
-import { useState } from "react";
-import blogContext from "./blogContext";
+import { useState } from 'react';
+import blogContext from './blogContext';
 
-const BlogState = (props)=>{
-  const host = "http://localhost:5000";
-  const blogsInitial = []  
+const BlogState = (props) => {
+  const host = 'https://inotebookvs.onrender.com';
+  const blogsInitial = [];
   const [blogs, setBlogs] = useState(blogsInitial);
 
-   // Fetch all blogs
-   const getBlogs = async ()=>{
+  // Fetch all blogs
+  const getBlogs = async () => {
     const response = await fetch(`${host}/api/blogs/fetchallblogs`, {
-      method: 'GET', 
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': localStorage.getItem('token')
-      }
+        'auth-token': localStorage.getItem('token'),
+      },
     });
-    const json = await response.json(); 
+    const json = await response.json();
     console.log(json);
     setBlogs(json);
-  }
+  };
 
   // Add a blog
-  const addBlog = async (title, description, image, category)=>{
+  const addBlog = async (title, description, image, category) => {
     // API Call
     const response = await fetch(`${host}/api/blogs/addblog`, {
-      method: 'POST',  
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': localStorage.getItem('token')
-      },    
-      body: JSON.stringify({title, description, image, category}) 
+        'auth-token': localStorage.getItem('token'),
+      },
+      body: JSON.stringify({ title, description, image, category }),
     });
-    const json = await response.json(); 
-    console.log(json);    
-    setBlogs(blogs.concat(json))
-  }
+    const json = await response.json();
+    console.log(json);
+    setBlogs(blogs.concat(json));
+  };
 
   // Edit a blog
- const editBlog = async (id, title, description, image, category)=>{
+  const editBlog = async (id, title, description, image, category) => {
     // API Call
     const response = await fetch(`${host}/api/blogs/updateblog/${id}`, {
-      method: 'PUT', 
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': localStorage.getItem('token')
-      },    
-      body: JSON.stringify({title, description, image, category}) 
+        'auth-token': localStorage.getItem('token'),
+      },
+      body: JSON.stringify({ title, description, image, category }),
     });
-    const json = await response.json(); 
+    const json = await response.json();
     console.log(json);
 
     let newBlogs = JSON.parse(JSON.stringify(blogs));
     // Logic to edit in client
-      for (let index = 0; index < newBlogs.length; index++) {
-        const element = newBlogs[index];
-        if(element._id === id){
-          newBlogs[index].title = title;
-          newBlogs[index].description = description;
-          newBlogs[index].image = image;
-          newBlogs[index].category = category;
-          break;
-        }      
+    for (let index = 0; index < newBlogs.length; index++) {
+      const element = newBlogs[index];
+      if (element._id === id) {
+        newBlogs[index].title = title;
+        newBlogs[index].description = description;
+        newBlogs[index].image = image;
+        newBlogs[index].category = category;
+        break;
       }
-      setBlogs(newBlogs);
-  }
+    }
+    setBlogs(newBlogs);
+  };
 
   // Delete a note
-  const deleteBlog = async (id)=>{
-    let confirmStatus = window.confirm("Are you sure?");     
-    if(confirmStatus === true){
-     // API Call
+  const deleteBlog = async (id) => {
+    let confirmStatus = window.confirm('Are you sure?');
+    if (confirmStatus === true) {
+      // API Call
       const response = await fetch(`${host}/api/blogs/deleteblog/${id}`, {
-        method: 'DELETE',   
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': localStorage.getItem('token')
-        } 
+          'auth-token': localStorage.getItem('token'),
+        },
       });
       const json = await response.json();
       console.log(json);
 
-      console.log("Deleting the blog with id " + id);
+      console.log('Deleting the blog with id ' + id);
       // Client side
-      const newBlogs = blogs.filter((blog)=>{return blog._id !== id})
+      const newBlogs = blogs.filter((blog) => {
+        return blog._id !== id;
+      });
       setBlogs(newBlogs);
     }
-  }
+  };
 
   return (
-      <blogContext.Provider value={{blogs, addBlog, editBlog, deleteBlog, getBlogs}}>
-          {props.children}
-      </blogContext.Provider>
-  )
-}
+    <blogContext.Provider
+      value={{ blogs, addBlog, editBlog, deleteBlog, getBlogs }}
+    >
+      {props.children}
+    </blogContext.Provider>
+  );
+};
 export default BlogState;

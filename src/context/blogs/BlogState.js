@@ -2,7 +2,7 @@ import { useState } from 'react';
 import blogContext from './blogContext';
 
 const BlogState = (props) => {
-  const host = 'https://inotebookvs.onrender.com';
+  const host = 'https://inotebook-8my7.onrender.com';
   const blogsInitial = [];
   const [blogs, setBlogs] = useState(blogsInitial);
 

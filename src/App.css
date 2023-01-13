@@ -7,25 +7,25 @@
   pointer-events: none;
 }
 
-.card-body i.cursor-pointer{
+.card-body i.cursor-pointer {
   cursor: pointer;
 }
 
-.img-responsive{
+.img-responsive {
   width: 100%;
 }
 
-.image-section .fa-solid{
+.image-section .fa-solid {
   position: absolute;
 }
 
-.image-section .fa-trash-can{
-  top:5px;
+.image-section .fa-trash-can {
+  top: 5px;
   right: 30px;
 }
 
-.image-section .fa-pen-to-square{
-  top:5px;
+.image-section .fa-pen-to-square {
+  top: 5px;
   right: 2px;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .signup-form h2,
-.login-form h2{
+.login-form h2 {
   text-align: center;
   font-size: 26px;
   font-weight: bold;
@@ -48,7 +48,16 @@
 }
 
 /* === signup ==== */
-.contact input{
+
+/* === sign-in ==== */
+
+.alert-info {
+  width: 505px;
+  margin: 55px auto;
+  border-left: 5px solid deepskyblue;
+}
+
+.contact input {
   border: 0px;
   border-bottom: 1px solid #ced4da;
 }

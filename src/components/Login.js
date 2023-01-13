@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Login = (props) => {
   const host = 'https://inotebook-8my7.onrender.com';
@@ -37,6 +38,11 @@ const Login = (props) => {
 
   return (
     <div className="container">
+      <div class="alert alert-info" role="alert">
+        Please login from the below login form to create/view your own notes,
+        blogs. Don't have an account, <b>SignUp </b>
+        <Link to="/signup">here</Link>
+      </div>
       <div className="login-form">
         <h2>Sign in</h2>
         <form method="post" onSubmit={handleSubmit}>

@@ -96,7 +96,7 @@ const Navbar = () => {
                 Login
               </Link>
               <Link className="btn btn-primary mx-1" to="/signup" role="button">
-                Signup
+                SignUp
               </Link>
             </div>
           )}
